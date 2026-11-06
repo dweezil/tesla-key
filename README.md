@@ -3,7 +3,7 @@
 Hosts the **public** key for the Tesla Fleet API, used by the Home Assistant
 Tesla Fleet integration. Tesla fetches it from:
 
-https://tesla.dernmonkeys.com/.well-known/appspecific/com.tesla.3p.public-key.pem
+https://fleet.dernmonkeys.com/.well-known/appspecific/com.tesla.3p.public-key.pem
 
 File in this repo: `.well-known/appspecific/com.tesla.3p.public-key.pem`
 
@@ -15,14 +15,16 @@ File in this repo: `.well-known/appspecific/com.tesla.3p.public-key.pem`
 
 ## Hosting
 
-- GitHub Pages, branch `main`, root folder, custom domain `tesla.dernmonkeys.com` (`CNAME` file).
+- GitHub Pages, branch `main`, root folder, custom domain `fleet.dernmonkeys.com` (`CNAME` file).
 - `.nojekyll` is required: without it Jekyll skips dot-folders and `.well-known` would 404.
 - DNS at Namecheap (dernmonkeys.com > Advanced DNS):
 
   | Type  | Host  | Value                |
   |-------|-------|----------------------|
-  | CNAME | tesla | dweezil.github.io.   |
+  | CNAME | fleet | dweezil.github.io.   |
 
+- Tesla's developer portal rejects any domain containing `tesla`, hence `fleet.dernmonkeys.com`.
+  The old `tesla` CNAME (`tesla.dernmonkeys.com`) is no longer used and can be deleted.
 - After DNS resolves and GitHub issues the certificate, enable Settings > Pages > **Enforce HTTPS**.
 - Domain should be verified at the account level (GitHub Settings > Pages > Verified domains,
   TXT record `_github-pages-challenge-dweezil.dernmonkeys.com`) to prevent subdomain takeover.
@@ -33,5 +35,5 @@ File in this repo: `.well-known/appspecific/com.tesla.3p.public-key.pem`
    (`-----BEGIN PUBLIC KEY-----` ... `-----END PUBLIC KEY-----`). Never use the private key.
 2. Overwrite `.well-known/appspecific/com.tesla.3p.public-key.pem` with it (whole file, LF endings).
 3. Commit and push to `main`; wait for the Pages build (1-2 min).
-4. Check: `curl https://tesla.dernmonkeys.com/.well-known/appspecific/com.tesla.3p.public-key.pem`
+4. Check: `curl https://fleet.dernmonkeys.com/.well-known/appspecific/com.tesla.3p.public-key.pem`
    returns the PEM, then continue the Tesla developer / Home Assistant registration.
